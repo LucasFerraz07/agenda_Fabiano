@@ -1,3 +1,11 @@
+<?php
+// Inclui o arquivo de conexão
+require_once __DIR__ . '/../config/database.php';
+
+// Define o charset (importante para acentuação)
+$conn->set_charset("utf8mb4");
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
