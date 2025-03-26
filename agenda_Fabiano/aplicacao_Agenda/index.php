@@ -1,9 +1,34 @@
 <?php
-// Inclui o arquivo de conexão
-require_once __DIR__ . '/../config/database.php';
 
-// Define o charset (importante para acentuação)
-$conn->set_charset("utf8mb4");
+include('conexao.php');
+
+if(isset($_POST['nome']) || isset($_POST['senha'])){
+
+    $nome = $mysqli->real_escape_string($_POST['nome']);
+    $senha = $mysqli->real_escape_string($_POST['senha']);
+
+    $sql_code = "SELECT * FROM usuario WHERE nome = '$nome' AND senha = '$senha' ";
+    $sql_query = $mysqli->query($sql_code) or die("Falha na Execução do código SQL: " . $mysqli->error);
+
+    $quantidade = $sql_query->num_rows;
+
+    if($quantidade==1){
+        $usuario = $sql_query->fetch_assoc();
+
+        if(!isset($_SESSION)){
+            session_start();
+        }
+
+        $_SESSION['id'] = $usuario['id'];
+        $_SESSION['nome'] = $usuario['nome'];
+
+        header("Location: painel.php");
+
+    } else{
+        echo "Falha ao logar! Username ou senha incorretos.";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +40,19 @@ $conn->set_charset("utf8mb4");
     <title>Document</title>
 </head>
 <body>
+
+    <div>
+        <h2>Acesse sua Conta</h2>
+        <form action="" method="POST">
+            <label for="nome">Nome: </label>
+            <input type="text" name="nome" id="nome" required>
+
+            <label for="senha">Senha: </label>
+            <input type="password" name="senha" id="senha" required>
+
+            <button type="submit" name="login">ENTRAR</button>
+        </form>
+    </div>
     
 </body>
 </html>
