@@ -50,10 +50,10 @@ if(isset($_POST['nome']) && isset($_POST['senha']) && isset($_POST['csenha'])) {
             <input type="text" name="nome" id="nome" required>
 
             <label for="senha">Senha: </label>
-            <input type="password" name="senha" id="senha" required>
+            <input type="password" name="senha" id="senha" minlength="8" maxlength="20" required>
 
             <label for="csenha">Confirmar Senha: </label>
-            <input type="password" name="csenha" id="csenha" required>
+            <input type="password" name="csenha" id="csenha" minlength="8" maxlength="20" required>
 
             <button type="submit" name="cadastro">CADASTRAR</button>
         </form>
