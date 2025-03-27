@@ -13,5 +13,7 @@
 </head>
 <body>
     Bem vindo ao Painel, <?php echo $_SESSION['nome']; ?>
+
+    <a href="logout.php">Sair</a>
 </body>
 </html>

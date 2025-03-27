@@ -5,7 +5,7 @@
     }
 
     if(!isset($_SESSION['id'])){
-        die("Você não pode acessar esta página! Faça o <p><a href=\"index.php\">login</a></p> antes.");
+        die("Você não pode acessar esta página! Faça o login antes. <p><a href=\"index.php\">Entrar</a></p>");
     }
 
 ?>
