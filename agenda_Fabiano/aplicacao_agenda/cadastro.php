@@ -5,14 +5,12 @@ include('conexao.php');
 if(isset($_POST['nome']) && isset($_POST['senha']) && isset($_POST['csenha'])) {
 
     $nome = $mysqli->real_escape_string($_POST['nome']);
-    $senha = $mysqli->real_escape_string($_POST['senha']);
+    $senha = $mysqli->real_escape_string(password_hash($_POST['senha'], PASSWORD_DEFAULT));
     $csenha = $mysqli->real_escape_string($_POST['csenha']);
 
 
-    if ($senha !== $csenha) {
-        echo "Erro: As senhas não coincidem!";
-    } else {
 
+    if (password_verify($senha, $csenha)) {
         $sql_verifica = "SELECT * FROM usuario WHERE nome = '$nome'";
         $query_verifica = $mysqli->query($sql_verifica) or die("Falha na Execução do código SQL: " . $mysqli->error);
 
@@ -29,6 +27,8 @@ if(isset($_POST['nome']) && isset($_POST['senha']) && isset($_POST['csenha'])) {
                 echo "Erro ao cadastrar: " . $mysqli->error;
             }
         }
+    } else {
+        echo"As senha não coincidem";
     }
 }
 
